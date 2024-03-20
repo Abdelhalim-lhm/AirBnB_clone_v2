@@ -1,26 +1,25 @@
 #!/usr/bin/python3
 """ State Module for HBNB project """
-import os
+from os import getenv
 from sqlalchemy import Column, String, ForeignKey
 from sqlalchemy.orm import relationship
 from models.base_model import BaseModel, Base
+
 
 class State(BaseModel, Base):
     """ State class """
     __tablename__ = 'states'
     name = Column(String(128), nullable=False)
+    cities = relationship(
+        'City',
+        cascade='all, delete, delete-orphan',
+        backref='state'
+    )
 
-    if os.getenv('HBNB_TYPE_STORAGE') == 'db':
-        cities = relationship(
-            'City',
-            cascade='all, delete, delete-orphan',
-            backref='state'
-        )
-    else:
+    if getenv("HBNB_TYPE_STORAGE") != "db":
         @property
         def cities(self):
             """Returns the cities in this State"""
-            from models import storage
             cities_in_state = []
             for city in storage.all(City).values():
                 if city.state_id == self.id:
