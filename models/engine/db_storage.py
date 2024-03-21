@@ -11,6 +11,7 @@ from models.place import Place
 from models.amenity import Amenity
 from models.review import Review
 
+
 class DBStorage:
     """This class manages storage of hbnb models in a SQL database"""
     __engine = None
@@ -64,7 +65,8 @@ class DBStorage:
     def reload(self):
         """Loads storage database"""
         Base.metadata.create_all(self.__engine)
-        SessionFactory = sessionmaker(bind=self.__engine, expire_on_commit=False)
+        SessionFactory = sessionmaker(
+            bind=self.__engine, expire_on_commit=False)
         self.__session = scoped_session(SessionFactory)()
 
     def close(self):
