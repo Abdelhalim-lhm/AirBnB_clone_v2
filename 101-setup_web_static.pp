@@ -55,14 +55,16 @@ exec { 'create_link':
   provider => shell,
 }
 
-exec { 'give_ownership':
-  command  => 'sudo chown -R ubuntu:ubuntu /data/',
-  provider => shell,
+file { '/data':
+  ensure  => directory,
+  recurse => true,
+  owner   => 'ubuntu',
+  group   => 'ubuntu',
 }
 
 exec { 'default_index':
-  command  => 'sudo sed -i "/listen 80 default_server/a\\
-    \tlocation /hbnb_static / {\
+  command  => 'sudo sed -i "/listen 80 default_server/a\
+        location /hbnb_static/ {\
     \n\t\talias /data/web_static/current/;\
     \n\t}" /etc/nginx/sites-enabled/default',
   provider => shell,
