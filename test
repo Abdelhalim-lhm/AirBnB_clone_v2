@@ -1,0 +1,3 @@
+#!/usr/bin/env bash
+
+sed -i '/listen 80 default_server/a\\tlocation /hbnb_static {\n\t\talias /data/web_static/current/;\n\t}' /etc/nginx/sites-enabled/default
