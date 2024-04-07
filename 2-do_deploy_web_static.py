@@ -3,16 +3,17 @@
 
 from fabric.api import *
 import os
+env.hosts = ['18.210.15.71', '54.157.136.110']
 
 
 def do_deploy(archive_path):
     """ function to deploy an archive """
-    if !(os.path.exists(archive_path)):
+    if not os.path.exists(archive_path):
         return False
     try:
         put(archive_path, '/tmp/')
-        f_ext = archive_path.split('/', -1)
-        f_name = file_ext.split('.', 0)
+        f_ext = archive_path.split('/')[-1]
+        f_name = f_ext.split('.')[0]
         data_path = '/data/web_static/release/'
         run('mkdir -p {}/{}'.format(data_path, f_name))
         run('tar -xzf /tmp/{} -C {}{}/'.format(f_ext, data_path, f_name))
