@@ -31,7 +31,7 @@ def do_deploy(archive_path):
         f_ext = archive_path.split('/')[-1]
         f_name = f_ext.split('.')[0]
         data_path = '/data/web_static/release/'
-        run('mkdir -p {}/{}'.format(data_path, f_name))
+        run('mkdir -p {}{}/'.format(data_path, f_name))
         run('tar -xzf /tmp/{} -C {}{}/'.format(f_ext, data_path, f_name))
         run('rm /tmp/{}'.format(f_ext))
         run('mv {0}{1}/web_static/* {0}{1}/'.format(data_path, f_name))
