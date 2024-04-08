@@ -14,7 +14,8 @@ def do_pack():
 
     time = datetime.now().strftime("%Y%m%d%H%M%S")
     f_name = 'versions/web_static_' + time + '.tgz'
-    local('mkdir -p versions')
+    if os.path.isdir("versions") is False:
+        local("mkdir versions")
     archive = local('tar -cvzf {} web_static'.format(f_name))
     if archive.succeeded:
         return f_name
