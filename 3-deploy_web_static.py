@@ -13,11 +13,11 @@ def do_pack():
     """ function to make an achive """
 
     time = datetime.now().strftime("%Y%m%d%H%M%S")
-    name = 'web_static_' + time + '.tgz'
+    f_name = 'versions/web_static_' + time + '.tgz'
     local('mkdir -p versions')
-    archive = local('tar -cvzf versions/{} web_static'.format(name))
+    archive = local('tar -cvzf {} web_static'.format(f_name))
     if archive.succeeded:
-        return name
+        return f_name
     else:
         return None
 
