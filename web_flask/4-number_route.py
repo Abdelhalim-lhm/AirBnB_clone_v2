@@ -33,7 +33,7 @@ def python(text="is cool"):
 
 @app.route("/number/<int:n>", strict_slashes=False)
 def isnumber(n):
-    """ Display c + text """
+    """ Display n is a number if n is an integer """
     if isinstance(n, int):
         return f"{n} is a number"
 
