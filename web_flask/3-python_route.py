@@ -28,7 +28,7 @@ def cisfun(text):
 @app.route("/python/<text>", strict_slashes=False)
 def python(text="is cool"):
     """ Display python + text """
-    return "python " + text.replace('_', ' ')
+    return "Python " + text.replace('_', ' ')
 
 
 if __name__ == "__main__":
