@@ -4,6 +4,8 @@ from os import getenv
 from sqlalchemy import Column, String, ForeignKey
 from sqlalchemy.orm import relationship
 from models.base_model import BaseModel, Base
+from models.city import City
+import models
 
 
 class State(BaseModel, Base):
@@ -21,7 +23,7 @@ class State(BaseModel, Base):
         def cities(self):
             """Returns the cities in this State"""
             cities_in_state = []
-            for city in storage.all(City).values():
+            for city in models.storage.all(City).values():
                 if city.state_id == self.id:
                     cities_in_state.append(city)
             return cities_in_state
